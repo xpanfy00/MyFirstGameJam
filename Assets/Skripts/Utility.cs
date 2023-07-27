@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class Utility
+public static class Utility
 {
+
     public static T[] ShuffleArray<T>(T[] array, int seed)
     {
         System.Random prng = new System.Random(seed);
@@ -18,4 +17,5 @@ public class Utility
 
         return array;
     }
+
 }

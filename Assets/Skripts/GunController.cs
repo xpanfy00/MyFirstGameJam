@@ -1,36 +1,36 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class GunController : MonoBehaviour
 {
+
     public Transform weaponHold;
     public Gun startingGun;
-    Gun equipGun;
+    Gun equippedGun;
 
-    private void Start()
+    void Start()
     {
-        if(startingGun != null)
+        if (startingGun != null)
         {
             EquipGun(startingGun);
         }
     }
+
     public void EquipGun(Gun gunToEquip)
     {
-        if (equipGun != null)
+        if (equippedGun != null)
         {
-            Destroy(equipGun.gameObject);
+            Destroy(equippedGun.gameObject);
         }
-        equipGun = Instantiate(gunToEquip, weaponHold.position, weaponHold.rotation) as Gun;
-        equipGun.transform.parent = weaponHold;
+        equippedGun = Instantiate(gunToEquip, weaponHold.position, weaponHold.rotation) as Gun;
+        equippedGun.transform.parent = weaponHold;
     }
 
-    internal void Shot()
+    public void Shoot()
     {
-        if(equipGun !=null)
+        if (equippedGun != null)
         {
-            equipGun.Shoot();
+            equippedGun.Shoot();
         }
     }
 }

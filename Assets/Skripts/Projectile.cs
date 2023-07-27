@@ -1,24 +1,24 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Projectile : MonoBehaviour
 {
+
     public LayerMask collisionMask;
     float speed = 10;
     float damage = 1;
+
     float lifetime = 3;
     float skinWidth = .1f;
 
-    private void Start()
+    void Start()
     {
         Destroy(gameObject, lifetime);
 
-        Collider[] initialCollision = Physics.OverlapSphere(transform.position, .1f, collisionMask);
-        if (initialCollision.Length > 0)
+        Collider[] initialCollisions = Physics.OverlapSphere(transform.position, .1f, collisionMask);
+        if (initialCollisions.Length > 0)
         {
-            OnHitObject(initialCollision[0]);
+            OnHitObject(initialCollisions[0]);
         }
     }
 
@@ -30,11 +30,12 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         float moveDistance = speed * Time.deltaTime;
-        CheckCollision(moveDistance);
+        CheckCollisions(moveDistance);
         transform.Translate(Vector3.forward * moveDistance);
     }
 
-    private void CheckCollision(float moveDistance)
+
+    void CheckCollisions(float moveDistance)
     {
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
@@ -54,7 +55,6 @@ public class Projectile : MonoBehaviour
         }
         GameObject.Destroy(gameObject);
     }
-
 
     void OnHitObject(Collider c)
     {
